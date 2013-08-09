@@ -6,7 +6,7 @@ String x = "x";
 PFont f;
 PeasyCam cam;
 ArrayList <PVector>pointList; 
-ArrayList timeList;
+ArrayList <Float>timeList;
 PVector pointSelected;
 
 int maxX = 0;
@@ -30,6 +30,7 @@ void setup() {
   cam.setMaximumDistance(2000);
 
   pointList = new ArrayList();
+  timeList = new ArrayList();
   importTextFile();
   smooth();
 
@@ -105,7 +106,8 @@ void draw() {
       fill(0,100,200);
       sphere(8);
       fill(0);
-      text(timeList.get(i), 0, 0);
+      float t = timeList.get(i)/1000;
+      text( t, 0, 0, 0);
       fill(255, 0, 0);
     }
     else {
@@ -119,7 +121,7 @@ void importTextFile() {
   String[] strLines = loadStrings("positions.txt"); // the name and extension of the file to import!
   for (int i = 0; i < strLines.length; ++i) {
     String[] arrTokens = split(strLines[i], ',');       // use the split array with character to isolate each component
-    float tt = str(arrTokens[0]);
+    float tt = float(arrTokens[0]);
     float xx = float(arrTokens[1]);                     // cast string value to a float values!
     float yy = float(arrTokens[3]);                     // cast string value to a float values!
     float zz = float(arrTokens[2]);                     // cast string value to a float values!
