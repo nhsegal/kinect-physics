@@ -1,9 +1,12 @@
+//Altered to accept a csv file that has four columns: t, x, y, z
+
 import peasy.*;
 
 String x = "x";
 PFont f;
 PeasyCam cam;
-ArrayList <PVector>pointList;   
+ArrayList <PVector>pointList; 
+ArrayList timeList;
 PVector pointSelected;
 
 int maxX = 0;
@@ -101,6 +104,8 @@ void draw() {
     if (i == a){
       fill(0,100,200);
       sphere(8);
+      fill(0);
+      text(timeList.get(i), 0, 0);
       fill(255, 0, 0);
     }
     else {
@@ -114,9 +119,11 @@ void importTextFile() {
   String[] strLines = loadStrings("positions.txt"); // the name and extension of the file to import!
   for (int i = 0; i < strLines.length; ++i) {
     String[] arrTokens = split(strLines[i], ',');       // use the split array with character to isolate each component
-    float xx = float(arrTokens[0]);                     // cast string value to a float values!
-    float yy = float(arrTokens[2]);                     // cast string value to a float values!
-    float zz = float(arrTokens[1]);                     // cast string value to a float values!
+    float tt = str(arrTokens[0]);
+    float xx = float(arrTokens[1]);                     // cast string value to a float values!
+    float yy = float(arrTokens[3]);                     // cast string value to a float values!
+    float zz = float(arrTokens[2]);                     // cast string value to a float values!
+    timeList.add( tt );
     pointList.add( new PVector(xx, yy, zz) );             // add values to a new array slot
   }
 }
